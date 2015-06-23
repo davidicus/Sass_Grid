@@ -1,0 +1,25 @@
+@mixin grids($column-num: 6, $mq: true, $margin-small: 1em 0, $margin-large: 0) {
+    $col-width    : 65px;
+    $gutter-width : 20px;
+    $columns      : 12;
+	$width: ($col-width * $columns) + ($gutter-width * ($columns - 1));
+	$grid: ($col-width * $column-num) + ($gutter-width * ($column-num - 1));
+	$grid: ($grid / $width) * 100%;
+    
+    display: inline-block;
+    padding: 0 0.5em;
+    vertical-align: top;
+    
+    @if $mq == true {
+        margin: $margin-small;
+        width: 100%;
+        @media (min-width: 37.5em) {
+            margin: $margin-large;
+            width: $grid;
+        }
+    }
+
+    @else {
+        width: $grid;
+    }
+}

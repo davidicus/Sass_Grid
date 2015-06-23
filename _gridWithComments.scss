@@ -1,0 +1,32 @@
+@mixin grids($column-num: 6, $mq: true, $margin-small: 1em 0, $margin-large: 0) {
+    $col-width    : 65px;
+    $gutter-width : 20px;
+    $columns      : 12;
+    // Set container width relative to user variables
+	$width: ($col-width * $columns) + ($gutter-width * ($columns - 1));
+
+	// First, calculate grid size in pixels
+	$grid: ($col-width * $column-num) + ($gutter-width * ($column-num - 1));
+
+	// Then, calculate the responsive grid 
+	$grid: ($grid / $width) * 100%;
+    
+    //styles to always apply
+    display: inline-block;
+    padding: 0 0.5em;
+    vertical-align: top;
+    
+    //styles to apply if you want the mixin to handle the stacking behavior at smaller sizes
+    @if $mq == true {
+        margin: $margin-small;
+        width: 100%;
+        @media (min-width: 37.5em) {
+            margin: $margin-large;
+            width: $grid;
+        }
+    }
+    //styles to apply if you dont want size to change
+    @else {
+        width: $grid;
+    }
+}
